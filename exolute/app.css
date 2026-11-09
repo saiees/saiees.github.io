@@ -30,3 +30,14 @@ button img.flag,html[data-theme=dark] button img.flag{filter:none}
 
 /* Currency cells travel within the converter during a swap. */
 .converter .currency{position:relative;z-index:1}
+
+.heading-actions { display: flex; align-items: center; gap: 6px; }
+#quick-language {
+  min-height: 44px;
+  padding-inline: 8px;
+  background: var(--surface);
+  color: var(--text);
+  border: 0;
+  border-radius: 8px;
+  font-size: 14px;
+}

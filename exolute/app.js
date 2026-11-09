@@ -2,10 +2,100 @@
 const $=id=>document.getElementById(id);
 function readCookie(name,fallback){try{const part=document.cookie.split('; ').find(x=>x.startsWith(name+'='));return part?JSON.parse(decodeURIComponent(part.slice(name.length+1))):fallback}catch{return fallback}}
 function cookie(name,data){document.cookie=`${name}=${encodeURIComponent(JSON.stringify(data))}; Max-Age=31536000; Path=/; SameSite=Lax`;}
-const defaults={from:'USD',to:'EUR',default1:'USD',default2:'EUR',amount:'',fee:0,theme:'system',language:navigator.language.startsWith('ru')?'ru':'en',round:true,favorites:[]};
+const defaults={from:'USD',to:'EUR',default1:'USD',default2:'EUR',amount:'',fee:0,theme:'system',language:'en',round:true,favorites:[]};
 let prefs={...defaults,...readCookie('exolute_prefs',{})},history=readCookie('exolute_history',[]),currencies=[],rates=null,pickTarget='from',saveTimer,installPrompt,lastResult=0;
-const labels={en:{commission:'Commission (%)',rate:'Exchange rate',updated:'Last updated',next:'Next update',history:'Conversion history',settings:'Preferences',default1:'Default currency 1',default2:'Default currency 2',language:'Language',theme:'App theme',round:'Round result',reset:'Reset settings',privacy:'Privacy policy',storage:'Settings and the latest 30 conversions are saved in cookies on this device.',downloadTitle:'Get the app now!',downloadText:'Exolute for Android — your familiar currency converter, always close at hand.',downloadButton:'Get it on Google Play',websiteTitle:'More to discover',websiteText:'Explore our apps, useful tools and new projects on our website.',websiteButton:'Visit our website',installNote:'Always close — on your home screen',install:'Install',choose:'Select currency'}};
-const russian={};document.querySelectorAll('[data-t]').forEach(e=>russian[e.dataset.t]=e.textContent);
+const labels = {
+  "en": {
+    "commission": "Commission (%)",
+    "rate": "Exchange rate",
+    "updated": "Last updated",
+    "next": "Next update",
+    "history": "Conversion history",
+    "settings": "Preferences",
+    "default1": "Default currency 1",
+    "default2": "Default currency 2",
+    "language": "Language",
+    "theme": "App theme",
+    "round": "Round result",
+    "reset": "Reset settings",
+    "privacy": "Privacy policy",
+    "storage": "Settings and the latest 30 conversions are saved in cookies on this device.",
+    "downloadTitle": "Get the app now!",
+    "downloadText": "Exolute for Android — your familiar currency converter, always close at hand.",
+    "downloadButton": "Get it on Google Play",
+    "websiteTitle": "More to discover",
+    "websiteText": "Explore our apps, useful tools and new projects on our website.",
+    "websiteButton": "Visit our website",
+    "installNote": "Always close — on your home screen",
+    "install": "Install",
+    "choose": "Select currency",
+    "installTitle": "Install Exolute",
+    "noCommission": "No commission",
+    "share": "Share conversion",
+    "amount": "Amount",
+    "swap": "Swap currencies",
+    "copy": "Copy result",
+    "fee": "Commission",
+    "promos": "More from nullware",
+    "clear": "Clear history",
+    "nav": "Navigation",
+    "home": "Converter",
+    "historyNav": "History",
+    "settingsNav": "Settings",
+    "close": "Close",
+    "search": "Search currencies",
+    "loadingRates": "Loading rates…",
+    "updatedRates": "Rates refreshed · updated daily",
+    "offlineRates": "Offline. Using saved rates.",
+    "failedRates": "Unable to load rates. Check your connection and retry."
+  },
+  "ru": {
+    "commission": "Комиссия (%)",
+    "rate": "Курс обмена",
+    "updated": "Курс обновлён",
+    "next": "Следующее обновление",
+    "downloadTitle": "Скачайте приложение сейчас!",
+    "downloadText": "Exolute для Android — привычный конвертер валют всегда под рукой.",
+    "downloadButton": "Скачать в Google Play",
+    "websiteTitle": "Ещё больше интересного",
+    "websiteText": "Загляните на наш сайт: приложения, полезные инструменты и новые проекты.",
+    "websiteButton": "Перейти на сайт",
+    "history": "История конвертаций",
+    "settings": "Настройки",
+    "default1": "Валюта по умолчанию 1",
+    "default2": "Валюта по умолчанию 2",
+    "language": "Сменить язык",
+    "theme": "Тема приложения",
+    "round": "Округлять результат",
+    "reset": "Сбросить настройки",
+    "storage": "Настройки и последние 30 конвертаций хранятся в cookies на этом устройстве.",
+    "privacy": "Политика конфиденциальности",
+    "installNote": "Всегда под рукой — на экране «Домой»",
+    "install": "Установить",
+    "choose": "Выберите валюту",
+    "installTitle": "Установить Exolute",
+    "noCommission": "Без комиссии",
+    "share": "Поделиться расчётом",
+    "amount": "Сумма",
+    "swap": "Поменять валюты",
+    "copy": "Скопировать результат",
+    "fee": "Комиссия",
+    "promos": "Больше от nullware",
+    "clear": "Очистить историю",
+    "nav": "Навигация",
+    "home": "Конвертер",
+    "historyNav": "История",
+    "settingsNav": "Настройки",
+    "close": "Закрыть",
+    "search": "Поиск валюты",
+    "loadingRates": "Загрузка курсов…",
+    "updatedRates": "Курсы актуальны · обновляются ежедневно",
+    "offlineRates": "Нет соединения. Используются сохранённые курсы.",
+    "failedRates": "Не удалось загрузить курсы. Проверьте соединение и повторите."
+  }
+};
+let rateStatus = null;
+prefs.language = prefs.language === "ru" ? "ru" : "en";
 const tr=(ru,en)=>prefs.language==='ru'?ru:en;
 function toast(s){$('toast').textContent=s;$('toast').classList.add('visible');setTimeout(()=>$('toast').classList.remove('visible'),2200)}
 delete prefs.haptic;delete prefs.auto;
@@ -14,9 +104,35 @@ function storeHistory(){while(encodeURIComponent(JSON.stringify(history)).length
 function format(v){return new Intl.NumberFormat(prefs.language,{maximumFractionDigits:prefs.round?2:8}).format(v)}
 function flag(code){const c=currencies.find(c=>c[0]===code);const span=document.createElement('span');if(c&&/^[a-z]{2}$/i.test(c[2])){const img=document.createElement('img');img.className='flag';img.alt='';img.src=`https://flagcdn.com/w80/${c[2].toLowerCase()}.png`;img.onerror=()=>{img.replaceWith(document.createTextNode(code.slice(0,2)))};span.append(img)}else span.textContent='◉';return span}
 function currencyButton(id,code){$(id).replaceChildren(flag(code),document.createTextNode(code))}
-function apply(){document.documentElement.lang=prefs.language;window.applyExoluteTheme(prefs.theme);document.querySelectorAll('[data-t]').forEach(e=>e.textContent=prefs.language==='en'?labels.en[e.dataset.t]:russian[e.dataset.t]);['from','to','default1','default2'].forEach(id=>currencyButton(id,prefs[id]));['round'].forEach(id=>$(id).checked=prefs[id]);['theme','language'].forEach(id=>$(id).value=prefs[id]);$('search').placeholder=tr('Поиск','Search');const opts=$('theme').options;[tr('Системная','System'),tr('Светлая','Light'),tr('Тёмная','Dark')].forEach((s,i)=>opts[i].textContent=s);calculate(false);renderHistory()}
+function apply() {
+  document.documentElement.lang = prefs.language;
+  window.applyExoluteTheme(prefs.theme);
+  const strings = labels[prefs.language];
+  document.querySelectorAll('[data-t]').forEach(element => {
+    element.textContent = strings[element.dataset.t];
+  });
+  document.querySelectorAll('[data-t-aria]').forEach(element => {
+    element.setAttribute('aria-label', strings[element.dataset.tAria]);
+  });
+  ['from', 'to', 'default1', 'default2'].forEach(id => currencyButton(id, prefs[id]));
+  $('round').checked = prefs.round;
+  $('theme').value = prefs.theme;
+  $('language').value = prefs.language;
+  $('quick-language').value = prefs.language;
+  $('search').placeholder = tr('Поиск', 'Search');
+  const themeOptions = $('theme').options;
+  themeOptions[0].textContent = tr('Системная', 'System');
+  themeOptions[1].textContent = tr('Светлая', 'Light');
+  themeOptions[2].textContent = tr('Тёмная', 'Dark');
+  renderRateStatus();
+  calculate(false);
+  renderHistory();
+}
+function renderRateStatus() {
+  $('status').textContent = rateStatus ? labels[prefs.language][rateStatus] : '';
+}
 function calculate(record=true){clearTimeout(saveTimer);const a=Number(String(prefs.amount).replace(',','.'));const fee=Number(prefs.fee);const rate=rates?.usd?.[prefs.to.toLowerCase()]/rates?.usd?.[prefs.from.toLowerCase()];const valid=Number.isFinite(a)&&a>=0&&Number.isFinite(fee)&&fee>=0&&fee<=100&&Number.isFinite(rate);lastResult=valid?a*rate*(1-fee/100):NaN;$('result').textContent=valid?format(lastResult):'—';$('rate').textContent=Number.isFinite(rate)?`1 ${prefs.from} = ${format(rate)} ${prefs.to}`:'—';$('commission-note').textContent=fee>0&&valid?tr(`С учётом комиссии вы получите на ${format(a*rate-lastResult)} ${prefs.to} меньше`,`Commission reduces the result by ${format(a*rate-lastResult)} ${prefs.to}`):tr('Без комиссии','No commission');if(rates?.date){const d=new Date(rates.date+'T00:00:00Z');$('updated').textContent=d.toLocaleDateString(prefs.language,{dateStyle:'full',timeZone:'UTC'});d.setUTCDate(d.getUTCDate()+1);$('next').textContent=d.toLocaleDateString(prefs.language,{dateStyle:'full',timeZone:'UTC'})}if(record&&valid&&a>0)saveTimer=setTimeout(()=>{const row=[Date.now(),prefs.from,prefs.to,a,lastResult,fee];if(history[0]&&JSON.stringify(history[0].slice(1))===JSON.stringify(row.slice(1)))return;history.unshift(row);history=history.slice(0,30);storeHistory();renderHistory()},2000)}
-async function loadRates(){ $('status').textContent=tr('Загрузка курсов…','Loading rates…');let loaded=false;for(const url of ['https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.json','https://latest.currency-api.pages.dev/v1/currencies/usd.json']){try{const response=await fetch(url,{signal:AbortSignal.timeout(12000)});if(!response.ok)throw Error();const data=await response.json();if(!data.usd?.eur||!data.date)throw Error();rates=data;try{localStorage.setItem('exolute_rates',JSON.stringify(data))}catch{}loaded=true;break}catch{}}$('status').textContent=loaded?tr('Курсы актуальны · обновляются ежедневно','Rates refreshed · updated daily'):rates?tr('Нет соединения. Используются сохранённые курсы.','Offline. Using saved rates.'):tr('Не удалось загрузить курсы. Проверьте соединение и повторите.','Unable to load rates. Check your connection and retry.');calculate(false)}
+async function loadRates(){ rateStatus = 'loadingRates'; renderRateStatus();let loaded=false;for(const url of ['https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/usd.json','https://latest.currency-api.pages.dev/v1/currencies/usd.json']){try{const response=await fetch(url,{signal:AbortSignal.timeout(12000)});if(!response.ok)throw Error();const data=await response.json();if(!data.usd?.eur||!data.date)throw Error();rates=data;try{localStorage.setItem('exolute_rates',JSON.stringify(data))}catch{}loaded=true;break}catch{}}rateStatus = loaded ? 'updatedRates' : rates ? 'offlineRates' : 'failedRates'; renderRateStatus();calculate(false)}
 function renderHistory(){const list=$('history-list');list.replaceChildren();if(!history.length){const div=document.createElement('div');div.className='empty';const img=document.createElement('img');img.src='/exolute/assets/ic_history.svg';img.alt='';const h=document.createElement('h3');h.textContent=tr('Место для вашей истории','A place for your history');const p=document.createElement('p');p.textContent=tr('История хранится локально на вашем устройстве. Конвертации сохраняются автоматически.','History stays on this device. Conversions are saved automatically.');div.append(img,h,p);list.append(div);return}history.forEach(row=>{const b=document.createElement('button');b.className='history-item';const t=document.createElement('small');t.textContent=new Date(row[0]).toLocaleString(prefs.language);const text=document.createElement('strong');text.textContent=`${format(row[3])} ${row[1]} → ${format(row[4])} ${row[2]}`;const c=document.createElement('small');c.textContent=`${tr('Комиссия','Commission')}: ${row[5]}%`;b.append(t,text,c);b.onclick=()=>{prefs.from=row[1];prefs.to=row[2];prefs.amount=String(row[3]);prefs.fee=row[5];$('amount').value=prefs.amount;$('fee').value=prefs.fee;persist();apply();navigate('home')};list.append(b)})}
 function navigate(page){['home','history','settings'].forEach(id=>$(id).hidden=id!==page);document.querySelectorAll('[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===page));window.scrollTo(0,0)}
 document.querySelectorAll('[data-page]').forEach(b=>b.onclick=()=>navigate(b.dataset.page));
@@ -57,7 +173,14 @@ function swapCurrencies() {
 }
 swapMotion.addEventListener('change', cancelSwapAnimations);
 $('amount').oninput=()=>{const v=$('amount').value;if(!/^\d*([.,]\d*)?$/.test(v)){$('amount').value=prefs.amount;return}prefs.amount=v;persist();calculate()};$('fee').oninput=()=>{prefs.fee=$('fee').value;persist();calculate()};$('swap').onclick=swapCurrencies;
-['theme','language','round'].forEach(id=>$(id).onchange=()=>{prefs[id]=$(id).type==='checkbox'?$(id).checked:$(id).value;persist();apply()});$('reset').onclick=()=>{if(confirm(tr('Сбросить настройки?','Reset settings?'))){prefs={...defaults,favorites:[]};$('amount').value='';$('fee').value='';persist();apply()}};$('clear').onclick=()=>{if(confirm(tr('Очистить историю конвертаций?','Clear conversion history?'))){clearTimeout(saveTimer);history=[];storeHistory();renderHistory()}};
+for (const id of ['language', 'quick-language']) {
+  $(id).onchange = event => {
+    prefs.language = event.target.value === 'ru' ? 'ru' : 'en';
+    persist();
+    apply();
+  };
+}
+['theme','round'].forEach(id=>$(id).onchange=()=>{prefs[id]=$(id).type==='checkbox'?$(id).checked:$(id).value;persist();apply()});$('reset').onclick=()=>{if(confirm(tr('Сбросить настройки?','Reset settings?'))){prefs={...defaults,favorites:[]};$('amount').value='';$('fee').value='';persist();apply()}};$('clear').onclick=()=>{if(confirm(tr('Очистить историю конвертаций?','Clear conversion history?'))){clearTimeout(saveTimer);history=[];storeHistory();renderHistory()}};
 $('result').onclick=async()=>{if(!Number.isFinite(lastResult))return;try{await navigator.clipboard.writeText(String(lastResult));toast(tr('Скопировано','Copied'))}catch{toast(tr('Копирование недоступно','Copy unavailable'))}};
 $('share').onclick=async()=>{if(!Number.isFinite(lastResult))return;const text=`Exolute: ${prefs.amount||0} ${prefs.from} = ${format(lastResult)} ${prefs.to} (${prefs.fee||0}%)`;try{if(navigator.share)await navigator.share({title:'Exolute',text});else{await navigator.clipboard.writeText(text);toast(tr('Расчёт скопирован','Conversion copied'))}}catch(e){if(e.name!=='AbortError')toast(tr('Не удалось поделиться','Unable to share'))}};
 const standalone=()=>matchMedia('(display-mode: standalone)').matches||navigator.standalone;
