@@ -245,9 +245,10 @@
 
         <textarea name="message" required maxlength="4000" rows="4" data-i18n-placeholder="modal.msgPlaceholder" placeholder="Tell me about your idea..." class="form-input form-textarea"></textarea>
 
-        <p id="form-status" class="form-status hidden"></p>
+        <p id="form-status" class="form-status hidden" role="status" aria-live="polite"></p>
 
         <div class="form-actions">
+          <button type="submit" id="form-fallback" class="btn btn-secondary" data-i18n="modal.sendFallback" hidden>Send via the contact service</button>
           <button type="submit" id="form-submit" class="btn btn-primary">
             <span id="form-submit-text" data-i18n="modal.sendBtn">Send Message</span>
             <i data-icon="send" class="icon-sm"></i>

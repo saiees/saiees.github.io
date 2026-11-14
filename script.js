@@ -304,6 +304,8 @@
       'modal.sendBtn': 'Send Message',
       'modal.sending': 'Sending...',
       'modal.sentOk': 'Message sent. Thank you!',
+      'modal.sendFallback': 'Send via the contact service',
+      'modal.activationPending': 'The contact form is awaiting email confirmation. Please email ' + MAIL + ' directly for now.',
       'modal.sentErr': 'Could not send the message. Please email ' + MAIL + ' directly.'
     },
     ru: {
@@ -339,6 +341,8 @@
       'modal.sendBtn': 'Отправить сообщение',
       'modal.sending': 'Отправка...',
       'modal.sentOk': 'Сообщение отправлено. Спасибо!',
+      'modal.sendFallback': 'Отправить через сервис связи',
+      'modal.activationPending': 'Форма ожидает подтверждения почты. Пока напишите напрямую на ' + MAIL + '.',
       'modal.sentErr': 'Не удалось отправить. Пожалуйста, напишите напрямую на ' + MAIL + '.'
     }
   };
@@ -840,33 +844,56 @@
       status.className = 'form-status ' + (ok ? 'status-ok' : 'status-err');
     }
 
-    form.addEventListener('submit', function (e) {
+    var fallback = document.getElementById('form-fallback');
+    var sending = false;
+
+    form.addEventListener('submit', async function (e) {
+      // The provider's regular form also handles email activation and browser challenges.
+      if (e.submitter === fallback && !sending) return;
       e.preventDefault();
+      if (sending) return;
+      sending = true;
       btn.disabled = true;
+      fallback.hidden = true;
       if (btnText) btnText.textContent = t('modal.sending');
       status.className = 'form-status hidden';
 
-      fetch('https://formsubmit.co/ajax/' + MAIL, {
-        method: 'POST',
-        headers: { 'Accept': 'application/json' },
-        body: new FormData(form)
-      })
-        .then(function (r) {
-          return r.json().then(function (j) { return { ok: r.ok, data: j }; });
-        })
-        .then(function (res) {
-          var success = res.ok && (res.data.success === true || res.data.success === 'true');
-          if (!success) throw new Error('failed');
-          form.reset();
-          setStatus(t('modal.sentOk'), true);
-        })
-        .catch(function () {
-          setStatus(t('modal.sentErr'), false);
-        })
-        .then(function () {
-          btn.disabled = false;
-          if (btnText) btnText.textContent = t('modal.sendBtn');
+      var controller = new AbortController();
+      var timeout = setTimeout(function () { controller.abort(); }, 20000);
+      try {
+        var payload = Object.fromEntries(new FormData(form));
+        var endpoint = new URL(form.action);
+        endpoint.pathname = '/ajax' + endpoint.pathname;
+        var response = await fetch(endpoint.href, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify(payload),
+          signal: controller.signal
         });
+        var data = await response.json();
+        var needsActivation = /activat|confirm|verif|check your (inbox|email)/i.test(data.message || '');
+        if (needsActivation) {
+          setStatus(t('modal.activationPending'), false);
+          fallback.hidden = false;
+          return;
+        }
+        if (!response.ok || (data.success !== true && data.success !== 'true')) {
+          throw new Error('Contact service rejected the submission');
+        }
+        form.reset();
+        setStatus(t('modal.sentOk'), true);
+      } catch (error) {
+        setStatus(t('modal.sentErr'), false);
+        fallback.hidden = false;
+      } finally {
+        clearTimeout(timeout);
+        sending = false;
+        btn.disabled = false;
+        if (btnText) btnText.textContent = t('modal.sendBtn');
+      }
     });
   }
 
