@@ -2,7 +2,7 @@
   'use strict';
 
   var MAIL = 'nullwr@duck.com';
-  var SWIFTSERVICE_URL = 'https://github.com/nullwrs/nullwrs.github.io/releases/latest/download/SwiftService_Setup.exe';
+  var SWIFTSERVICE_URL = 'https://github.com/saiees/saiees.github.io/releases/latest/download/SwiftService_Setup.exe';
   var EXOLUTE_PLAY_URL = 'https://play.google.com/store/apps/details?id=com.saieesoft.exolute&pcampaignid=web_share';
   var ASKANONYMOUS_URL = 'https://t.me/AskAnonymousBot';
   var VAULTYS_URL = 'https://t.me/VaultysBot';
@@ -250,8 +250,8 @@
     {
       id: 'github',
       label: 'GitHub',
-      handle: 'github.com/nullwrs',
-      href: 'https://github.com/nullwrs',
+      handle: 'github.com/saiees',
+      href: 'https://github.com/saiees',
       icon: 'github'
     },
     {
@@ -376,7 +376,7 @@
 
   var currentLang = 'en';
   try {
-    var saved = localStorage.getItem('nullware_lang');
+    var saved = localStorage.getItem('saiee_lang') || localStorage.getItem('nullware_lang');
     if (saved === 'ru' || saved === 'en') currentLang = saved;
   } catch (e) {}
 
@@ -395,7 +395,7 @@
     currentLang = lang;
     document.documentElement.lang = lang;
     try {
-      localStorage.setItem('nullware_lang', lang);
+      localStorage.setItem('saiee_lang', lang);
     } catch (e) {}
 
     Array.prototype.forEach.call(document.querySelectorAll('[data-lang]'), function (btn) {
