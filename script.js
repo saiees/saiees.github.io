@@ -8,22 +8,22 @@
   var VAULTYS_URL = 'https://t.me/VaultysBot';
 
   var MARQUEE_ITEMS = [
-    'Windows Utilities',
-    'Android Apps',
-    'Telegram Bots',
-    'Web Design',
-    '3D Modeling',
-    'Covers & Graphics',
-    'Photo Editing',
+    'Windows tools',
+    'Android apps',
+    'Telegram bots',
+    'Web design',
+    '3D models',
+    'Covers & graphics',
+    'Photo editing',
     'Python',
     'Kotlin',
-    'Zero-Telemetry'
+    'No telemetry'
   ];
 
   var STATS = [
-    { value: '100%', label: { en: 'local-first privacy', ru: 'приватность и локальность' } },
-    { value: 'Code + 3D', label: { en: 'software, web & visuals', ru: 'софт, веб и визуал' } },
-    { value: '4', label: { en: 'shipped products', ru: 'готовых продукта' } }
+    { value: '1', label: { en: 'developer + designer', ru: 'разработчик + дизайнер' } },
+    { value: 'Code + visual', label: { en: 'from idea to release', ru: 'от идеи до релиза' } },
+    { value: '4', label: { en: 'live projects', ru: 'проекта уже работают' } }
   ];
 
   var SERVICES = [
@@ -31,48 +31,48 @@
       number: '01',
       name: { en: 'Windows Utilities', ru: 'Утилиты для Windows' },
       description: {
-        en: 'Creation of fast, lightweight desktop tools for system cleanup, registry repair, DNS optimization, and performance tuning with zero background bloat.',
-        ru: 'Создание быстрых и легковесных десктопных утилит для очистки системы, исправления реестра, оптимизации DNS и повышения производительности без фонового мусора.'
+        en: 'Small tools for cleanup, network and Windows settings. No useless background processes.',
+        ru: 'Небольшие утилиты для очистки, сети и настройки Windows. Без лишних фоновых процессов.'
       }
     },
     {
       number: '02',
       name: { en: 'Android Applications', ru: 'Android-приложения' },
       description: {
-        en: 'Designing and building native mobile experiences with clean interfaces, real-time data synchronization, and reliable offline-first architecture.',
-        ru: 'Проектирование и разработка нативных мобильных приложений с чистым интерфейсом, синхронизацией в реальном времени и надежной offline-first архитектурой.'
+        en: 'Native apps with a clear interface. Online or offline — whatever the project needs.',
+        ru: 'Нативные приложения с понятным интерфейсом. Онлайн или офлайн — как нужно задаче.'
       }
     },
     {
       number: '03',
       name: { en: 'Telegram Bots', ru: 'Telegram-боты' },
       description: {
-        en: 'Custom high-speed bots and automated workflows focused on instant message routing, end-to-end user privacy, and effortless interaction.',
-        ru: 'Быстрые кастомные боты и автоматизация процессов с фокусом на мгновенную маршрутизацию сообщений, приватность пользователей и удобство.'
+        en: 'Bots for a specific job: messages, automation, payments and Telegram Business.',
+        ru: 'Боты под конкретную задачу: сообщения, автоматизация, платежи и Telegram Business.'
       }
     },
     {
       number: '04',
       name: { en: 'Web Design, Covers & Photo Graphics', ru: 'Дизайн сайтов, обложки и графика' },
       description: {
-        en: 'Crafting cohesive visual identities, modern website designs, album/project cover art, social media visuals, and photo editing with a sharp, memorable aesthetic.',
-        ru: 'Разработка дизайна сайтов и интерфейсов, создание обложек, баннеров, визуального оформления проектов и качественная обработка фото в чистом современном стиле.'
+        en: 'Web design, covers, banners and photo editing. Clean and without visual noise.',
+        ru: 'Дизайн сайтов, обложки, баннеры и обработка фото. Чисто и без визуального шума.'
       }
     },
     {
       number: '05',
-      name: { en: 'Web & Custom Software', ru: 'Веб-разработка и кастомный софт' },
+      name: { en: 'Websites & Custom Tools', ru: 'Сайты и софт на заказ' },
       description: {
-        en: 'Engineering modern, responsive web experiences and bespoke single-purpose software tailored to solve real problems with precision.',
-        ru: 'Создание современных адаптивных веб-сайтов и узкоспециализированного софта, точно решающего конкретные прикладные задачи.'
+        en: 'Websites and small custom software for one clear task. No bloated all-in-one apps.',
+        ru: 'Сайты и небольшой софт под конкретную задачу. Без универсальных комбайнов.'
       }
     },
     {
       number: '06',
       name: { en: '3D Modeling & Visualization', ru: '3D-моделирование и визуализация' },
       description: {
-        en: 'Creating custom 3D models, functional parts, product renders, and stylized 3D assets for digital visuals, web scenes, or 3D printing.',
-        ru: 'Создание кастомных 3D-моделей, функциональных деталей, рендеров и стилизованных 3D-ассетов для дизайна, веба или 3D-печати.'
+        en: 'Models, parts and renders for projects, visuals or 3D printing.',
+        ru: 'Модели, детали и рендеры для проектов, визуала или 3D-печати.'
       }
     }
   ];
@@ -88,31 +88,31 @@
       onlineHref: '/exolute/',
       onlineCta: { en: 'Try online', ru: 'Попробовать онлайн' },
       images: ['src/projects/exolute.png'],
-      cardTopTitle: { en: 'Offline-Ready Mode', ru: 'Работа без интернета' },
+      cardTopTitle: { en: 'Works offline', ru: 'работает офлайн' },
       cardTopSub: {
-        en: 'Automatically caches the latest synchronized exchange rates on your device so you can convert currencies anywhere.',
-        ru: 'Автоматически кэширует последние актуальные курсы валют на устройстве для конвертации в любом месте.'
+        en: 'Keeps the latest rates on your phone, so it still works without internet.',
+        ru: 'Сохраняет последние курсы на телефоне и не ломается без интернета.'
       },
       cardTopTag: 'GOOGLE PLAY',
-      cardBottomTitle: { en: 'Financial Precision', ru: 'Финансовая точность' },
+      cardBottomTitle: { en: 'what it does', ru: 'что умеет' },
       cardBottomList: {
         en: [
-          'Real-time exchange rates across global currencies',
-          'Interactive historical rate charts & trends',
-          'Distraction-free, minimal Material interface',
-          'Instant multi-currency calculation'
+          'A long list of currencies',
+          'Fresh rates and history charts',
+          'Commission calculation',
+          'A clean interface without overload'
         ],
         ru: [
-          'Курсы мировых валют в реальном времени',
-          'Интерактивные графики истории и трендов',
-          'Минималистичный Material-интерфейс без лишнего шума',
-          'Мгновенный мультивалютный пересчет'
+          'большой список валют',
+          'актуальные курсы и графики',
+          'расчёт комиссии',
+          'чистый интерфейс без перегруза'
         ]
       },
       mainVisualTitle: 'EXOLUTE CONVERTER',
       mainVisualSubtitle: {
-        en: 'Real-time currency converter with historical data, offline mode, and a sharp, minimal interface.',
-        ru: 'Конвертер валют в реальном времени с историей курсов, офлайн-режимом и чистым минималистичным интерфейсом.'
+        en: 'Currency converter for Android. Rates, charts, commission and offline mode.',
+        ru: 'Конвертер валют для Android. Курсы, графики, комиссия и офлайн-режим.'
       },
       iconName: 'smartphone'
     },
@@ -124,31 +124,31 @@
       href: ASKANONYMOUS_URL,
       cta: { en: 'Open in Telegram', ru: 'Открыть в Telegram' },
       images: ['src/projects/askanonymousbot.png'],
-      cardTopTitle: { en: 'End-to-End Anonymity', ru: 'Полная анонимность' },
+      cardTopTitle: { en: 'Anonymous and simple', ru: 'анонимно и просто' },
       cardTopSub: {
-        en: 'Routes anonymous questions and replies directly inside Telegram without storing message history or sender metadata.',
-        ru: 'Доставляет анонимные вопросы и ответы прямо в Telegram без сохранения истории сообщений и метаданных отправителя.'
+        en: 'Share your link, get anonymous messages and reply right inside Telegram.',
+        ru: 'Делишься ссылкой, получаешь анонимные сообщения и отвечаешь прямо в Telegram.'
       },
       cardTopTag: 'TELEGRAM',
-      cardBottomTitle: { en: 'Instant Q&A Flow', ru: 'Мгновенные вопросы и ответы' },
+      cardBottomTitle: { en: 'what it does', ru: 'что умеет' },
       cardBottomList: {
         en: [
-          'Personal shareable link generated in one tap',
-          'Zero persistent message content storage',
-          'Native swipe-to-reply workflow inside Telegram',
-          'Built-in anti-spam & privacy controls'
+          'Receives and sends anonymous messages',
+          'Publishes messages to a channel',
+          'Manages personal links',
+          'Includes anti-spam controls'
         ],
         ru: [
-          'Генерация персональной ссылки в одно касание',
-          'Отсутствие постоянного хранения текста сообщений',
-          'Нативный ответ свайпом прямо внутри Telegram',
-          'Встроенная защита от спама и настройки приватности'
+          'принимает и отправляет анонимные сообщения',
+          'публикует сообщения в канал',
+          'управляет персональными ссылками',
+          'защищает от спама'
         ]
       },
       mainVisualTitle: '@ASKANONYMOUSBOT',
       mainVisualSubtitle: {
-        en: 'Telegram bot for anonymous messaging with end-to-end privacy and no data storage.',
-        ru: 'Telegram-бот для анонимных сообщений с полной приватностью и без сохранения данных.'
+        en: 'Telegram bot for anonymous messages.',
+        ru: 'Telegram-бот для анонимных сообщений.'
       },
       iconName: 'message-square'
     },
@@ -160,31 +160,31 @@
       href: VAULTYS_URL,
       cta: { en: 'Open in Telegram', ru: 'Открыть в Telegram' },
       images: ['src/projects/vaultysbot.png'],
-      cardTopTitle: { en: 'Anti-Delete & Self-Destruct Saver', ru: 'Защита от удаления и сохранение таймеров' },
+      cardTopTitle: { en: 'Catches what disappeared', ru: 'ловит то, что исчезло' },
       cardTopSub: {
-        en: 'Instantly notifies you when an interlocutor edits or deletes a message, and saves view-once media with timers.',
-        ru: 'Моментально пришлет уведомление, если собеседник изменит или удалит сообщение, и скачает исчезающие медиа с таймером.'
+        en: 'Shows edited and deleted messages, and saves one-time media.',
+        ru: 'Показывает изменённые и удалённые сообщения, сохраняет одноразовые медиа.'
       },
       cardTopTag: 'TELEGRAM',
-      cardBottomTitle: { en: 'Message Recovery Suite', ru: 'Контроль переписки и медиа' },
+      cardBottomTitle: { en: 'what it does', ru: 'что умеет' },
       cardBottomList: {
         en: [
-          'Instant alerts on deleted or edited messages',
-          'Saves view-once photos and videos with timers',
-          'Downloads disappearing voice messages & video notes',
-          'Seamless integration directly inside Telegram'
+          'Alerts about edits and deletions',
+          'Saves one-time photos and videos',
+          'Keeps disappearing voice and video notes',
+          'Works right inside Telegram'
         ],
         ru: [
-          'Моментальные уведомления об изменении или удалении сообщений',
-          'Скачивание одноразовых фото и видео с таймером',
-          'Сохранение исчезающих голосовых и видеокружков',
-          'Быстрая и удобная работа прямо внутри Telegram'
+          'сообщает об изменении и удалении сообщений',
+          'сохраняет одноразовые фото и видео',
+          'сохраняет исчезающие голосовые и кружки',
+          'работает прямо в Telegram'
         ]
       },
       mainVisualTitle: '@VAULTYSBOT',
       mainVisualSubtitle: {
-        en: 'Telegram assistant that catches edited or deleted messages and downloads self-destructing photos, videos, voice notes, and video circles.',
-        ru: 'Telegram-бот, который моментально уведомляет об измененных и удаленных сообщениях, а также скачивает одноразовые фото, видео, голосовые и кружки с таймером.'
+        en: 'Telegram bot for deleted messages and one-time media.',
+        ru: 'Telegram-бот для удалённых сообщений и одноразовых медиа.'
       },
       iconName: 'eye'
     },
@@ -196,31 +196,31 @@
       href: SWIFTSERVICE_URL,
       cta: { en: 'Download .exe', ru: 'Скачать .exe' },
       images: ['src/projects/swiftservice.png'],
-      cardTopTitle: { en: 'Zero-Telemetry Architecture', ru: 'Архитектура без телеметрии' },
+      cardTopTitle: { en: 'Nothing running behind your back', ru: 'ничего лишнего в фоне' },
       cardTopSub: {
-        en: 'All system cleanup, registry repair, and network tuning runs 100% locally on your machine with no background tracking.',
-        ru: 'Очистка системы, ремонт реестра и настройка сети выполняются на 100% локально на вашем ПК без фоновой слежки.'
+        en: 'Cleanup and system settings run locally. No telemetry or hidden background work.',
+        ru: 'Очистка и настройка работают локально. Без телеметрии и скрытой работы в фоне.'
       },
       cardTopTag: 'WINDOWS 10 / 11',
-      cardBottomTitle: { en: 'Core Optimization Suite', ru: 'Комплекс оптимизации' },
+      cardBottomTitle: { en: 'what it does', ru: 'что умеет' },
       cardBottomList: {
         en: [
-          'Deep system cleanup & temporary junk removal',
-          'Safe registry maintenance & broken key repair',
-          'Low-latency network & DNS configuration tools',
-          'Game mode & background performance tuning'
+          'Cleans temporary files',
+          'Checks and repairs the registry',
+          'Sets up network and DNS',
+          'Tunes background processes for games'
         ],
         ru: [
-          'Глубокая очистка системы и временных файлов',
-          'Безопасное обслуживание и исправление ключей реестра',
-          'Настройка сети и DNS для минимальной задержки',
-          'Игровой режим и оптимизация фоновых процессов'
+          'чистит временные файлы',
+          'проверяет и исправляет реестр',
+          'настраивает сеть и DNS',
+          'отключает лишнее для игр'
         ]
       },
       mainVisualTitle: 'SWIFTSERVICE ENGINE',
       mainVisualSubtitle: {
-        en: 'Comprehensive Windows optimization suite - clean, repair, and tune your system in one lightweight application.',
-        ru: 'Комплексный пакет оптимизации Windows - очистка, исправление и настройка системы в одном легковесном приложении.'
+        en: 'A small Windows utility for cleanup, repair and system settings.',
+        ru: 'Небольшая утилита для очистки, исправления и настройки Windows.'
       },
       iconName: 'cpu'
     }
@@ -276,32 +276,34 @@
       'nav.services': 'services',
       'nav.projects': 'projects',
       'nav.stack': 'stack',
-      'hero.status': 'online · ready to build',
+      'hero.status': 'online · open to work',
       'hero.uptime': 'up',
-      'hero.subtitle': 'an independent developer crafting minimal and focused digital tools',
-      'hero.contactBtn': 'Contact Me',
+      'hero.subtitle': 'I make useful apps, bots and visuals — without the clutter',
+      'hero.contactBtn': 'Write to me',
       'hero.projectsBtn': 'Projects',
       'about.title': 'about me',
-      'about.text': "I am an independent developer building minimalist utilities with sharp design for Windows, Android, and Telegram. Every tool is crafted to do one job well with local-first privacy, high speed, and zero clutter. Beyond code, I create web designs, 3D models, cover art, and photo graphics. Let's build something incredible together!",
+      'about.text': 'Independent developer and designer. I make apps for Android and Windows, Telegram bots, websites, 3D and graphics. If an idea is useful, I am interested.',
       'services.title': 'services',
       'projects.title': 'projects',
-      'projects.badge': 'shipped builds',
+      'projects.badge': 'live projects',
       'stack.title': 'stack & tools',
       'links.title': 'where to find me',
-      'links.copyEmail': 'Copy Email',
+      'links.copyEmail': 'Copy email',
       'links.copied': 'Copied',
-      'links.support': 'Support',
-      'links.ctaTitle': 'Got an idea, design, or custom tool request?',
-      'links.ctaSub': 'Direct form or email - fast response, zero bureaucracy.',
-      'links.ctaBtn': "Let's Talk",
-      'footer.contact': 'direct contact →',
-      'modal.eyebrow': 'Direct Contact',
-      'modal.title': "Let's Talk",
-      'modal.desc': 'Have a software, web design, or 3D project in mind? Reach out directly via email or send a message below.',
+      'links.support': 'Support me',
+      'links.ctaTitle': 'Need an app, bot, website or design?',
+      'links.ctaSub': 'Write to me. We will figure it out.',
+      'links.ctaBtn': 'Write to me',
+      'footer.meta': 'opensource ◡ since 2024',
+      'footer.copy': '© 2026 saiee · built by me.',
+      'footer.contact': 'write to me',
+      'modal.eyebrow': 'Contact',
+      'modal.title': 'Write to me',
+      'modal.desc': 'Tell me what you need. A couple of sentences is enough.',
       'modal.namePlaceholder': 'Your name',
       'modal.emailPlaceholder': 'Your email',
-      'modal.msgPlaceholder': 'Tell me about your idea...',
-      'modal.sendBtn': 'Send Message',
+      'modal.msgPlaceholder': 'What do you need?',
+      'modal.sendBtn': 'Send',
       'modal.sending': 'Sending...',
       'modal.sentOk': 'Message sent. Thank you!',
       'modal.sendFallback': 'Send via the contact service',
@@ -313,32 +315,34 @@
       'nav.services': 'услуги',
       'nav.projects': 'проекты',
       'nav.stack': 'стек',
-      'hero.status': 'в сети · открыт к проектам',
+      'hero.status': 'в сети · беру заказы',
       'hero.uptime': 'онлайн',
-      'hero.subtitle': 'независимый разработчик минималистичных и сфокусированных цифровых утилит',
-      'hero.contactBtn': 'Связаться',
-      'hero.projectsBtn': 'Проекты',
+      'hero.subtitle': 'делаю полезные приложения, ботов и дизайн — без лишнего',
+      'hero.contactBtn': 'написать',
+      'hero.projectsBtn': 'проекты',
       'about.title': 'обо мне',
-      'about.text': 'Я независимый разработчик минималистичных утилит с выверенным дизайном для Windows, Android и Telegram. Каждый инструмент создается, чтобы отлично решать свою задачу: с локальной приватностью, высокой скоростью и без лишнего шума. Помимо кода, занимаюсь веб-дизайном, 3D-моделированием, созданием обложек и обработкой фото. Давайте создадим что-то крутое вместе!',
+      'about.text': 'Я независимый разработчик и дизайнер. Делаю приложения для Android и Windows, ботов для Telegram. Ещё — сайты, 3D, обложки и обработку фото. Если идея полезная — мне интересно.',
       'services.title': 'услуги',
       'projects.title': 'проекты',
-      'projects.badge': 'релизы',
+      'projects.badge': 'уже работают',
       'stack.title': 'стек и инструменты',
-      'links.title': 'где меня найти',
-      'links.copyEmail': 'Скопировать',
-      'links.copied': 'Скопировано',
-      'links.support': 'Поддержать',
-      'links.ctaTitle': 'Нужен софт, дизайн сайта, обложка или 3D-модель?',
-      'links.ctaSub': 'Напишите через форму или на почту - быстрый ответ без бюрократии.',
-      'links.ctaBtn': 'Написать',
-      'footer.contact': 'связаться напрямую →',
-      'modal.eyebrow': 'Прямой контакт',
-      'modal.title': 'Связаться',
-      'modal.desc': 'Есть идея для приложения, бота, дизайна или 3D-модели? Напишите напрямую на почту или отправьте сообщение ниже.',
-      'modal.namePlaceholder': 'Ваше имя',
-      'modal.emailPlaceholder': 'Ваш email',
-      'modal.msgPlaceholder': 'Расскажите о вашей задаче...',
-      'modal.sendBtn': 'Отправить сообщение',
+      'links.title': 'ссылки',
+      'links.copyEmail': 'скопировать email',
+      'links.copied': 'скопировано',
+      'links.support': 'поддержать',
+      'links.ctaTitle': 'Нужно приложение, бот, сайт или дизайн?',
+      'links.ctaSub': 'Напиши. Обсудим.',
+      'links.ctaBtn': 'написать',
+      'footer.meta': 'opensource ◡ с 2024',
+      'footer.copy': '© 2026 saiee · сделал сам.',
+      'footer.contact': 'написать',
+      'modal.eyebrow': 'связь',
+      'modal.title': 'написать',
+      'modal.desc': 'Напиши, что нужно. Пары предложений хватит.',
+      'modal.namePlaceholder': 'имя',
+      'modal.emailPlaceholder': 'email',
+      'modal.msgPlaceholder': 'что нужно?',
+      'modal.sendBtn': 'отправить',
       'modal.sending': 'Отправка...',
       'modal.sentOk': 'Сообщение отправлено. Спасибо!',
       'modal.sendFallback': 'Отправить через сервис связи',

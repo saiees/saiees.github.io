@@ -4,12 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>saiee</title>
-  <meta name="description" content="Independent developer & designer building minimalist utilities for Windows, Android, and Telegram, alongside web design, 3D modeling, cover art, and photo editing." />
+  <meta name="description" content="Independent developer and designer. Apps for Android and Windows, Telegram bots, websites, 3D and graphics." />
   <meta name="theme-color" content="#0A0A0A" />
 
   <meta property="og:type" content="website" />
   <meta property="og:title" content="saiee" />
-  <meta property="og:description" content="Independent developer & designer crafting minimal digital tools, web interfaces, 3D models, and visual graphics." />
+  <meta property="og:description" content="Apps, bots, websites, 3D and graphics. Made by saiee." />
   <meta property="og:image" content="src/logo/nobg%20logo.png" />
   <meta name="twitter:card" content="summary" />
 
@@ -66,7 +66,7 @@
             <div class="status-bar">
               <div class="status-pill">
                 <span class="status-dot"></span>
-                <span data-i18n="hero.status">online · ready to build</span>
+                <span data-i18n="hero.status">online · open to work</span>
               </div>
               <span class="meta-item" title="Session Uptime">
                 <span data-i18n="hero.uptime">up</span>
@@ -77,19 +77,19 @@
             <h1 class="hero-title">saiee<span class="accent-dot"></span></h1>
 
             <p class="hero-subtitle" data-i18n="hero.subtitle">
-              an independent developer crafting minimal and focused digital tools
+              I make useful apps, bots and visuals — without the clutter
             </p>
 
             <div class="hero-tags">
-              <span class="mini-tag">zero-telemetry</span>
-              <span class="mini-tag">local-first</span>
-              <span class="mini-tag">web & graphic design</span>
-              <span class="mini-tag">3d modeling</span>
+              <span class="mini-tag">android & windows</span>
+              <span class="mini-tag">telegram bots</span>
+              <span class="mini-tag">web design</span>
+              <span class="mini-tag">3d & graphics</span>
             </div>
 
             <div class="hero-actions">
               <button type="button" data-open-contact class="btn btn-primary">
-                <span data-i18n="hero.contactBtn">Contact Me</span>
+                <span data-i18n="hero.contactBtn">Write to me</span>
                 <i data-icon="send" class="icon-sm"></i>
               </button>
               <button type="button" data-scroll="projects" class="btn btn-secondary">
@@ -115,7 +115,7 @@
         </div>
 
         <p class="about-paragraph" data-i18n="about.text">
-          I am an independent developer building minimalist utilities with sharp design for Windows, Android, and Telegram. Every tool is crafted to do one job well with local-first privacy, high speed, and zero clutter. Beyond code, I create web designs, 3D models, cover art, and photo graphics. Let's build something incredible together!
+          Independent developer and designer. I make apps for Android and Windows, Telegram bots, websites, 3D and graphics. If an idea is useful, I am interested.
         </p>
 
         <div class="stats-grid" id="stats-grid"></div>
@@ -150,7 +150,7 @@
           <h2 class="section-title">
             <span data-i18n="projects.title">projects</span>
           </h2>
-          <span class="section-badge" data-i18n="projects.badge">shipped builds</span>
+          <span class="section-badge" data-i18n="projects.badge">live projects</span>
         </div>
 
         <div id="projects-list" class="projects-list"></div>
@@ -168,11 +168,11 @@
 
         <div class="contact-banner">
           <div class="contact-banner-text">
-            <span class="contact-banner-title" data-i18n="links.ctaTitle">Got an idea, design, or custom tool request?</span>
-            <span class="contact-banner-sub" data-i18n="links.ctaSub">Direct form or email - fast response, zero bureaucracy.</span>
+            <span class="contact-banner-title" data-i18n="links.ctaTitle">Need an app, bot, website or design?</span>
+            <span class="contact-banner-sub" data-i18n="links.ctaSub">Write to me. We will figure it out.</span>
           </div>
           <button type="button" data-open-contact class="btn btn-primary btn-sm">
-            <span data-i18n="links.ctaBtn">Let's Talk</span>
+            <span data-i18n="links.ctaBtn">Write to me</span>
             <i data-icon="message-square" class="icon-sm"></i>
           </button>
         </div>
@@ -181,11 +181,11 @@
 
     <footer class="site-footer" data-fade>
       <div class="footer-top">
-        <span class="footer-meta">opensource ◡ created at 2024</span>
+        <span class="footer-meta" data-i18n="footer.meta">opensource ◡ since 2024</span>
       </div>
       <div class="footer-bottom">
-        <span>© 2026 saiee · built with precision.</span>
-        <button type="button" data-open-contact class="footer-link" data-i18n="footer.contact">direct contact →</button>
+        <span data-i18n="footer.copy">© 2026 saiee · built by me.</span>
+        <button type="button" data-open-contact class="footer-link" data-i18n="footer.contact">write to me</button>
       </div>
     </footer>
   </div>
@@ -194,8 +194,8 @@
     <div class="modal-panel">
       <div class="modal-head">
         <div>
-          <span class="modal-eyebrow" data-i18n="modal.eyebrow">Direct Contact</span>
-          <h3 id="modal-title" class="modal-title" data-i18n="modal.title">Let's Talk</h3>
+          <span class="modal-eyebrow" data-i18n="modal.eyebrow">Contact</span>
+          <h3 id="modal-title" class="modal-title" data-i18n="modal.title">Write to me</h3>
         </div>
         <button type="button" id="modal-close" class="icon-btn" aria-label="Close modal">
           <i data-icon="x" class="icon-md"></i>
@@ -203,7 +203,7 @@
       </div>
 
       <p class="modal-desc" data-i18n="modal.desc">
-        Have a project in mind? Reach out directly via email or send a message below.
+        Tell me what you need. A couple of sentences is enough.
       </p>
 
       <div class="modal-quick-links">
@@ -215,7 +215,7 @@
         <button type="button" id="modal-copy-email" class="chip-link">
           <span id="modal-copy-idle" class="chip-inner">
             <i data-icon="copy" class="icon-xs"></i>
-            <span data-i18n="links.copyEmail">Copy Email</span>
+            <span data-i18n="links.copyEmail">Copy email</span>
           </span>
           <span id="modal-copy-done" class="chip-inner hidden">
             <i data-icon="check" class="icon-xs text-success"></i>
@@ -230,7 +230,7 @@
 
         <a href="https://www.paypal.com/paypalme/mentalhash" target="_blank" rel="noopener noreferrer" class="chip-link chip-support">
           <i data-icon="heart" class="icon-xs text-orange"></i>
-          <span data-i18n="links.support">Support</span>
+          <span data-i18n="links.support">Support me</span>
         </a>
       </div>
 
