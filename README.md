@@ -13,7 +13,7 @@ Small independent software for Windows, Android and Telegram.
 
 ## Contact
 
-[![Email](https://img.shields.io/badge/Email-nullwrs@duck.com-orange?style=for-the-badge)](mailto:nullwr@duck.com)
+[![Email](https://img.shields.io/badge/Email-saiee@duck.com-orange?style=for-the-badge)](mailto:saiee@duck.com)
 [![Telegram](https://img.shields.io/badge/Telegram-AskAnonymousBot-26A5E4?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/AskAnonymousBot)
 
 ## Support
